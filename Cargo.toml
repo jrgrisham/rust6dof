@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = [ "aero", "kinematics","sim", "simcore"]

@@ -30,13 +30,13 @@ impl ForceModel<AeroStep> for Aero {
 
 }
 
-//#[cfg(test)]
-//mod tests {
-//    use super::*;
-//
-//    #[test]
-//    fn it_works() {
-//        let result = add(2, 2);
-//        assert_eq!(result, 4);
-//    }
-//}
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn can_instantiate_aero() {
+        let aero = Aero::new("test.dat".to_string());
+        assert_eq!(aero.aero_file, "test.dat".to_string());
+    }
+}

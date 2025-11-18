@@ -1,3 +1,6 @@
 [workspace]
 resolver = "3"
 members = [ "aero", "kinematics","sim", "simcore"]
+
+[workspace.dependencies]
+simcore = { path = "simcore" }

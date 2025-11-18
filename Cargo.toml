@@ -4,3 +4,4 @@ members = [ "aero", "kinematics","sim", "simcore"]
 
 [workspace.dependencies]
 simcore = { path = "simcore" }
+aero = { path = "aero" }

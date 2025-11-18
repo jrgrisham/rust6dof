@@ -1,6 +1,8 @@
 use kinematics;
 use simcore::vec::Vec3;
+use simcore::model::ForceModel;
 use std::f64::consts::PI;
+use aero;
 
 fn main() {
 
@@ -13,5 +15,18 @@ fn main() {
     println!("v_a = {v_a:?}");
     println!("q_ba = {q_ba:?}");
     println!("v_b = {v_b:?}");
+
+    let aero_table = "aero.dat";
+    let aero = aero::Aero::new(aero_table.to_string());
+    aero.init();
+    let aero_step = aero::AeroStep{
+        mach: 2.5,
+        alpha_tot: 90.0,
+        phi: 0.0
+    };
+
+    let aero_force = aero.step(&aero_step);
+    println!("aero_force = {aero_force:?}");
+
 
 }

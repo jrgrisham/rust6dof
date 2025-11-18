@@ -1,14 +1,42 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use simcore::model::{ForceModel, Force};
+
+pub struct Aero {
+    pub aero_file: String
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub struct AeroStep {
+    pub mach: f64,
+    pub alpha_tot: f64,
+    pub phi: f64
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+impl Aero {
+    pub fn new(aero_table_file: String) -> Aero {
+        Aero { aero_file: aero_table_file }
     }
 }
+
+impl ForceModel<AeroStep> for Aero {
+
+    fn init(&self) {
+        println!("Loading aero data from {}.", self.aero_file)
+    }
+
+    fn step(&self, step: &AeroStep) -> Force {
+        let force_axial = 1.0 * step.alpha_tot;
+        let aero_force = Force::new(force_axial, 0.0, 0.0);
+        aero_force
+    }
+
+}
+
+//#[cfg(test)]
+//mod tests {
+//    use super::*;
+//
+//    #[test]
+//    fn it_works() {
+//        let result = add(2, 2);
+//        assert_eq!(result, 4);
+//    }
+//}

@@ -39,4 +39,15 @@ mod tests {
         let aero = Aero::new("test.dat".to_string());
         assert_eq!(aero.aero_file, "test.dat".to_string());
     }
+
+    #[test]
+    fn can_take_step() {
+        let aero = Aero::new("test.dat".to_string());
+        let step_input = AeroStep { mach: 2.0, alpha_tot: 1.0, phi: 0.0 };
+        let aero_force = aero.step(&step_input);
+        assert!(aero_force.force.x.is_finite());
+        assert!(aero_force.force.y.is_finite());
+        assert!(aero_force.force.z.is_finite());
+    }
+
 }
